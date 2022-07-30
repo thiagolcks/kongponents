@@ -1,17 +1,22 @@
 import KButton from '@/components/KButton/KButton.vue'
+const VALID_ICON_NAMES = [] // TODO: import valid kicon names list
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
   title: 'Component/KButton',
   component: KButton,
+  parameters: {
+    layout: 'centered',
+  },
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
-    onClick: {},
+    onClick: { action: 'clicked' },
     size: {
       control: { type: 'select' },
       options: ['small', 'medium', 'large'],
     },
+    icon: { options: ['', ...VALID_ICON_NAMES] },
   },
 }
 
@@ -24,7 +29,9 @@ const Template = (args) => ({
     return { args }
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template: '<KButton v-bind="args" />',
+  template: `
+    <KButton v-bind="args" />
+  `,
 })
 
 export const Primary = Template.bind({})
@@ -40,6 +47,14 @@ Secondary.args = {
   label: 'Button',
 }
 
+/* export const ButtonSizes = () => (
+  <div>
+    <KButton appearance="secondary" size="small">Small</KButton>
+    <KButton appearance="secondary" size="medium">Medium</KButton>
+    <KButton appearance="secondary" size="large">Large</KButton>
+  </div>
+)
+ */
 export const Large = Template.bind({})
 Large.args = {
   size: 'large',
