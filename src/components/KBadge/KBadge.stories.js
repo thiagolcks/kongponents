@@ -1,17 +1,23 @@
 import KBadge from '@/components/KBadge/KBadge.vue'
+import CustomMDXDocumentation from '../../../docs/components/badge.md'
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
   title: 'Component/KBadge',
   component: KBadge,
+  description: 'Badges, pills, or whatever you wanna call them. Slap it on something.',
   parameters: {
     layout: 'centered',
+    docs: {
+      page: CustomMDXDocumentation,
+    },
   },
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     color: { control: 'color' },
     backgroundColor: { control: 'color' },
     appearance: {
+      name: 'appearance5',
       control: { type: 'select' },
       options: ['success', 'warning', 'danger', 'info', 'default', 'custom'],
     },

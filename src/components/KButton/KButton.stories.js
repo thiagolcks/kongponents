@@ -10,13 +10,33 @@ export default {
   },
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
-    backgroundColor: { control: 'color' },
     onClick: { action: 'clicked' },
+    appearance: {
+      name: 'appearance5',
+      control: { type: 'select' },
+      options: ['creation', 'primary', 'danger', 'secondary', 'outline', 'btn-link'],
+    },
     size: {
       control: { type: 'select' },
       options: ['small', 'medium', 'large'],
+      defaultValue: 'medium',
     },
+    disabled: { control: 'boolean', defaultValue: false },
+    isOpen: { control: 'boolean' },
     icon: { options: ['', ...VALID_ICON_NAMES] },
+    default: {
+      description: 'The default Vue slot',
+      defaultValue: 'my button',
+      control: {
+        type: 'text',
+      },
+      table: {
+        category: 'Slots',
+        type: {
+          summary: 'html',
+        },
+      },
+    },
   },
 }
 
@@ -30,7 +50,10 @@ const Template = (args) => ({
   },
   // And then the `args` are bound to your component with `v-bind="args"`
   template: `
-    <KButton v-bind="args" />
+    <KButton v-bind="args">
+      <div v-if="${'default' in args}" v-slot>${args.default}</div>
+      <div v-else>test</div>
+    </KButton>
   `,
 })
 
