@@ -3,21 +3,16 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: [
-    'plugin:vue/vue3-recommended',
-    '@vue/standard',
-    '@vue/typescript',
-    'plugin:vue/vue3-essential',
-    'eslint:recommended',
-    '@vue/typescript/recommended',
-  ],
+  extends: ['plugin:vue/vue3-recommended', '@vue/standard', '@vue/typescript', 'plugin:vue/vue3-essential', 'eslint:recommended', '@vue/typescript/recommended', 'plugin:storybook/recommended'],
   parserOptions: {
     ecmaVersion: 2020,
   },
   rules: {
     indent: 'off',
     'space-before-function-paren': 'off',
-    quotes: ['error', 'single', { avoidEscape: true }],
+    quotes: ['error', 'single', {
+      avoidEscape: true,
+    }],
     'no-multi-spaces': 'error',
     'no-trailing-spaces': 'error',
     'comma-dangle': ['error', 'always-multiline'],
