@@ -1,23 +1,23 @@
-import KBadge from '@/components/KBadge/KBadge.vue'
+import KIcon, { iconNames } from '@/components/KIcon/KIcon.vue'
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'Component/KBadge',
-  component: KBadge,
+  title: 'Component/KIcon',
+  component: KIcon,
   parameters: {
     layout: 'centered',
   },
+  args: {
+    size: '24',
+    icon: 'dashboard',
+  },
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
-    color: { control: 'color' },
+    size: { control: 'number' },
     backgroundColor: { control: 'color' },
-    appearance: {
+    icon: {
       control: { type: 'select' },
-      options: ['success', 'warning', 'danger', 'info', 'default', 'custom'],
-    },
-    shape: {
-      control: { type: 'select' },
-      options: ['rounded', 'rectangular'],
+      options: iconNames,
     },
   },
 }
@@ -25,42 +25,33 @@ export default {
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = (args) => ({
   // Components used in your story `template` are defined in the `components` object
-  components: { KBadge },
+  components: { KIcon },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
     return { args }
   },
   // And then the `args` are bound to your component with `v-bind="args"`
   template: `
-    <KBadge v-bind="args">
-      <div v-if="${'default' in args}" v-slot>${args.default}</div>
-      <div v-else>test</div>
-    </KBadge>
+    <KIcon v-bind="args" />
   `,
 })
 
 export const Success = Template.bind({})
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Success.args = {
-  appearance: 'success',
+  icon: 'clipboard',
 }
 
-export const Danger = Template.bind({})
-Danger.args = {
-  appearance: 'danger',
-  default: 'Badge',
-}
-
-export const Rectangle = Template.bind({})
-Rectangle.args = {
-  shape: 'rectangular',
-  default: 'Badge',
-}
-
-export const Custom = Template.bind({})
-Custom.args = {
-  appearamce: 'custom',
-  default: 'Badge',
-  color: 'var(--white)',
-  backgroundColor: 'var(--purple-300)',
-}
+/* export const Icons = () => {
+  return (
+    <div className="nds-typography">
+      <div className="icon-demo">
+          <KIcon
+            v-for="icon in iconNames"
+            size="24"
+            :icon="icon" />
+            <span>{{ icon }}</span>
+      </div>
+    </div>
+  )
+} */

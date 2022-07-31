@@ -1,5 +1,5 @@
 import KBadge from '@/components/KBadge/KBadge.vue'
-import CustomMDXDocumentation from '../../../docs/components/badge.md'
+import CustomMDXDocumentation from './badge.mdx'
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
@@ -9,6 +9,7 @@ export default {
   parameters: {
     layout: 'centered',
     docs: {
+      inlineStories: true,
       page: CustomMDXDocumentation,
     },
   },
@@ -39,7 +40,7 @@ const Template = (args) => ({
   // And then the `args` are bound to your component with `v-bind="args"`
   template: `
     <KBadge v-bind="args">
-      <div v-if="${'default' in args}" v-slot>${args.default}</div>
+      <template v-if="${'default' in args}" v-slot>${args.default}</template>
       <div v-else>test</div>
     </KBadge>
   `,
@@ -49,12 +50,18 @@ export const Success = Template.bind({})
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Success.args = {
   appearance: 'success',
+  default: 'SUCCESS',
 }
 Success.parameters = {
   docs: {
     description: {
       story:
         'A Badge of `appearance="success"` is a badge styled green.',
+    },
+    source: {
+      code: '<KBadge appearance="success" class="mr-2">SUCCESS</KBadge>',
+      language: 'html',
+      type: 'auto',
     },
   },
 }

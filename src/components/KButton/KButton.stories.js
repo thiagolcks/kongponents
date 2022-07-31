@@ -1,5 +1,5 @@
 import KButton from '@/components/KButton/KButton.vue'
-const VALID_ICON_NAMES = [] // TODO: import valid kicon names list
+import { iconNames } from '@/components/KIcon/KIcon.vue'
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
@@ -7,6 +7,12 @@ export default {
   component: KButton,
   parameters: {
     layout: 'centered',
+  },
+  // set defaults
+  args: {
+    default: 'my button',
+    size: 'medium',
+    disabled: false,
   },
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
@@ -19,14 +25,15 @@ export default {
     size: {
       control: { type: 'select' },
       options: ['small', 'medium', 'large'],
-      defaultValue: 'medium',
     },
-    disabled: { control: 'boolean', defaultValue: false },
+    disabled: { control: 'boolean' },
     isOpen: { control: 'boolean' },
-    icon: { options: ['', ...VALID_ICON_NAMES] },
+    icon: {
+      control: { type: 'select' },
+      options: iconNames,
+    },
     default: {
       description: 'The default Vue slot',
-      defaultValue: 'my button',
       control: {
         type: 'text',
       },
@@ -51,8 +58,7 @@ const Template = (args) => ({
   // And then the `args` are bound to your component with `v-bind="args"`
   template: `
     <KButton v-bind="args">
-      <div v-if="${'default' in args}" v-slot>${args.default}</div>
-      <div v-else>test</div>
+      <template v-if="${'default' in args}" v-slot>${args.default}</template>
     </KButton>
   `,
 })
@@ -62,6 +68,7 @@ export const Primary = Template.bind({})
 Primary.args = {
   appearance: 'primary',
   label: 'Button',
+  default: 'this is a test',
 }
 
 export const Secondary = Template.bind({})
@@ -70,14 +77,20 @@ Secondary.args = {
   label: 'Button',
 }
 
-/* export const ButtonSizes = () => (
-  <div>
-    <KButton appearance="secondary" size="small">Small</KButton>
-    <KButton appearance="secondary" size="medium">Medium</KButton>
-    <KButton appearance="secondary" size="large">Large</KButton>
-  </div>
-)
- */
+export const ButtonSizes = (args) => ({
+  components: { KButton },
+  setup() {
+    return { args }
+  },
+  template: `
+    <div>
+      <KButton appearance="secondary" size="small" class="mr-2">Small</KButton>
+      <KButton appearance="secondary" size="medium">Medium</KButton>
+      <KButton appearance="secondary" size="large">Large</KButton>
+    </div>
+  `,
+})
+
 export const Large = Template.bind({})
 Large.args = {
   size: 'large',

@@ -1,28 +1,40 @@
+import React from 'react' // need this import so HTML below doesn't error
+import { app } from '@storybook/vue3'
+import '../src/styles/styles.scss'
+import Kongponents from '../src'
 import { Layout } from "./Layouts";
-import { Anchor, DocsContainer } from '@storybook/addon-docs/blocks';
+// Import component-specific files
+import * as icons from '../src/components/KIcon/icons' // KIcon icons
+import ToastManager from '../src/components/KToaster/ToastManager'
+
+// Register all Kongponents
+app.use(Kongponents)
+app.config.globalProperties.$icons = Object.keys(icons)
+app.config.globalProperties.$toaster = new ToastManager()
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
-  /* docs: {
+  docs: {
     page: () => <Layout />,
-  }, */
-  /* docs: {
-    container: props => (
-      <div>
-        <DocsContainer context={props.context}>
-          <Anchor storyId={props.context.id} />
-          {props.children}
-        </DocsContainer>
-      </div>
-    ),
-  }, */
+  },
   controls: {
     matchers: {
       color: /(background|color)$/i,
       date: /Date$/,
     },
   },
-  /* options: {
+  viewMode: "docs",/*
+  previewTabs: {
+    "storybook/docs/panel": {
+      title: "Docs",
+      index: -1
+    },
+    'canvas': {
+      title: 'Preview',
+    },
+  }, */
+  /* TODO: TOC
+  options: {
     storySort: {
       order: [
         "Introduction",
@@ -35,13 +47,4 @@ export const parameters = {
       ],
     },
   }, */
-  viewMode: "docs",
-  previewTabs: {
-    "storybook/docs/panel": {
-      title: "Docs",
-    },
-    'canvas': {
-      title: 'Preview',
-    },
-  },
 }

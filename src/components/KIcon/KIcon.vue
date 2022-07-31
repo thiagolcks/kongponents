@@ -33,7 +33,7 @@ import * as allIcons from './icons'
 // @ts-ignore
 const icons: Array<string, any[]> = allIcons
 
-const iconNames = Object.keys(icons)
+export const iconNames = Object.keys(icons)
 const DEFAULTS = {
   size: '24',
   viewBox: '0 0 24 24',
