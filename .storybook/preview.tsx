@@ -23,14 +23,20 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  viewMode: "docs",/*
+  viewMode: "docs",
+  previewTabs: {
+    'canvas': {
+      title: 'Try it',
+    },
+  },
+  /*
   previewTabs: {
     "storybook/docs/panel": {
       title: "Docs",
       index: -1
     },
     'canvas': {
-      title: 'Preview',
+      title: 'Try it',
     },
   }, */
   /* TODO: TOC

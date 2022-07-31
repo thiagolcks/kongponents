@@ -34,6 +34,9 @@ export default {
     default: {
       description: 'innerHTML inside badge',
       control: { type: 'text' },
+      type: {
+        required: true,
+      },
       table: {
         category: 'Slots',
         type: {
@@ -79,6 +82,17 @@ Primary.parameters = {
   },
 }
 
+/* const appearanceTemplate: () => JSX.Element = () => {
+  return (
+    <div>
+      <KBadge appearance="success" class="mr-2">SUCCESS</KBadge>
+      <KBadge appearance="warning" class="mr-2">WARNING</KBadge>
+      <KBadge appearance="danger" class="mr-2">DANGER</KBadge>
+      <KBadge appearance="info" class="mr-2">INFO</KBadge>
+      <KBadge>DEFAULT</KBadge>
+    </div>
+  )
+} */
 export const Appearance = (args) => ({
   components: { KBadge },
   setup() {
@@ -95,6 +109,25 @@ export const Appearance = (args) => ({
   `,
 })
 Appearance.storyName = 'appearance'
+Appearance.parameters = {
+  docs: {
+    description: {
+      story:
+        'A Badge is a pill or whatever',
+    },
+    source: {
+      code: `
+        <KBadge appearance="success" class="mr-2">SUCCESS</KBadge>
+        <KBadge appearance="warning" class="mr-2">WARNING</KBadge>
+        <KBadge appearance="danger" class="mr-2">DANGER</KBadge>
+        <KBadge appearance="info" class="mr-2">INFO</KBadge>
+        <KBadge>DEFAULT</KBadge>
+      `,
+      language: 'html',
+      type: 'auto',
+    },
+  },
+}
 
 export const Shape = (args) => ({
   components: { KBadge },
@@ -138,7 +171,6 @@ export const DefaultSlot = (args) => ({
     </div>
   `,
 })
-Shape.storyName = 'Slots/default'
 
 export const Theming = (args) => ({
   components: { KBadge },
