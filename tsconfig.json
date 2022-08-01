@@ -22,6 +22,7 @@
     "declarationDir": "dist/types",
     "types": [
       "vite/client",
+      "mdx"
     ],
     "paths": {
       "@/*": [
@@ -33,7 +34,8 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "src/**/*.mdx"
   ],
   "exclude": [
     "node_modules",
